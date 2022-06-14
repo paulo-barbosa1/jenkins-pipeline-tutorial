@@ -3,7 +3,7 @@ pipeline {
   label 'maven'
     }
     parameters {
-        booleanParam(name: 'CLEAN_BEFORE_BUILD', descritption: 'limpa o ambiente depois do runnup')
+        booleanParam(name: 'CLEAN_BEFORE_BUILD', description: 'limpa o ambiente depois do runnup')
     }
     stages {
         stage('Clean') {
