@@ -2,17 +2,22 @@ pipeline {
     agent {
   label 'maven'
     }
-            stages {
-                stage('Compile') {
-        steps {
-            echo 'stage compile'
-        }
-        }
-        stage('Test') {
+    stages {
+        stage('Clean') {
             steps {
-                echo 'stage test'
+                echo 'Stage clean'
             }
+    }
+        stage('Compile') {
+    steps {
+        echo 'stage compile'
+    }
+    }
+    stage('Test') {
+        steps {
+            echo 'stage test'
         }
+    }
 }
 
 }
