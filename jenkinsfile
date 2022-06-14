@@ -1,31 +1,35 @@
 pipeline {
     agent {
-  label 'maven'
+        label 'maven'
     }
+
     parameters {
-        booleanParam(name: 'CLEAN_BEFORE_BUILD', description: 'limpa o ambiente depois do runnup')
+        booleanParam name: 'CLEAN_BEFORE', description: 'Executa o passo de "clean" antes do build'
     }
+
     stages {
         stage('Clean') {
-
             when {
                 expression { params.CLEAN_BEFORE }
             }
             steps {
-                sh 'mvn clean'
+               sh 'mvn clean'
             }
-    }
-        stage('Compile') {
-           steps {
-              sh 'mvm compile'
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn compile'
             }
-    }
+        }
+
         stage('Test') {
             steps {
-               sh 'mvm verify'
-               junit 'target/surefire-reports/*.xml'
+                sh 'mvn verify'
+                junit 'target/surefire-reports/*.xml'
             }
-    }
+        }
+
         stage('Deploy') {
             steps {
                 script {
@@ -34,6 +38,5 @@ pipeline {
                 }
             }
         }
-}
-
+    }
 }
