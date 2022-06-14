@@ -1,0 +1,18 @@
+pipeline {
+    agent {
+  label 'maven'
+    }
+            stages {
+                stage('compile') {
+        steps {
+            echo 'stage compile'
+        }
+        }
+        stage('Test' {
+            steps {
+                echo 'stage test'
+            }
+        })
+}
+
+}
