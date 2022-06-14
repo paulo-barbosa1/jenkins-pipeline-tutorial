@@ -3,16 +3,16 @@ pipeline {
   label 'maven'
     }
             stages {
-                stage('compile') {
+                stage('Compile') {
         steps {
             echo 'stage compile'
         }
         }
-        stage('Test' {
+        stage('Test') {
             steps {
                 echo 'stage test'
             }
-        })
+        }
 }
 
 }
