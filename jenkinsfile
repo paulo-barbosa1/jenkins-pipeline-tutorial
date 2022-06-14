@@ -12,19 +12,26 @@ pipeline {
                 expression { params.CLEAN_BEFORE }
             }
             steps {
-                echo 'Stage clean'
+                sh 'mvn clean'
             }
     }
         stage('Compile') {
            steps {
-              echo 'stage compile'
+              sh 'mvm compile'
             }
     }
         stage('Test') {
             steps {
-               echo 'stage test'
+               sh 'mvm verify'
+               junit 'target/surefire-reports/*.xml'
             }
     }
+        stage('Deploy') {
+            steps {
+                def pom = readMavenPom file: 'pom.xml'
+                sh "./deploy.sh ${pom.getArtifactId()} ${pom.getVersion()}"
+            }
+        }
 }
 
 }
