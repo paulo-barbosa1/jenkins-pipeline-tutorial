@@ -2,21 +2,28 @@ pipeline {
     agent {
   label 'maven'
     }
+    parameters {
+        booleanParam(name: 'CLEAN_BEFORE_BUILD', descritption: 'limpa o ambiente depois do runnup')
+    }
     stages {
         stage('Clean') {
+
+            when {
+                expression { params.CLEAN_BEFORE }
+            }
             steps {
                 echo 'Stage clean'
             }
     }
         stage('Compile') {
-    steps {
-        echo 'stage compile'
+           steps {
+              echo 'stage compile'
+            }
     }
-    }
-    stage('Test') {
-        steps {
-            echo 'stage test'
-        }
+        stage('Test') {
+            steps {
+               echo 'stage test'
+            }
     }
 }
 
